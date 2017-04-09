@@ -1,4 +1,6 @@
-package postagger;
+package matcher;
+
+import postagger.VerbType;
 
 /*
  Verbs are classified in to three types as follows 

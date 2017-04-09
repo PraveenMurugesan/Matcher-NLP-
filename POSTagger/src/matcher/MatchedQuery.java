@@ -1,4 +1,4 @@
-package postagger;
+package matcher;
 
 class MatchedQuery {
 

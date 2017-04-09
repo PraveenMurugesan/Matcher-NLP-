@@ -1,4 +1,7 @@
-package postagger;
+package matcher;
+
+import postagger.Service;
+import postagger.Verb;
 
 /*
 UserQuery has three attributes

@@ -1,4 +1,4 @@
-package postagger;
+package matcher;
 
 /**
  * Stemmer, implementing the Porter Stemming Algorithm

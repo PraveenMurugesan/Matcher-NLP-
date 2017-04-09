@@ -1,9 +1,12 @@
 package postagger;
 
-//Whistle has three attributes
-//Query given by users
-// Verb in the sentence
-// Service object
+/*
+UserQuery has three attributes
+Query given by users
+Verb in the sentence
+Service object
+*/
+
 class UserQuery {
 
     private String query;

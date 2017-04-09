@@ -24,35 +24,11 @@ class BackendConnection {
     private String consumerQueriesFileName;
     private String generalQueriesFileName;
 
-    public BackendConnection() {
-        Scanner s=new Scanner(System.in);
-        
-        //C:\\Users\\Praveen\\OneDrive\\NLP\\Verbs.txt
-
-//C:\\Users\\Praveen\\OneDrive\\NLP\\ProducerQueries.txt
-
-//C:\\Users\\Praveen\\OneDrive\\NLP\\ConsumerQueries.txt
-
-//C:\\Users\\Praveen\\OneDrive\\NLP\\GeneralQueries.txt
-        
-//C:\\Users\\Praveen\\OneDrive\\NLP\\stanford-postagger-2015-04-20\\stanford-postagger-2015-04-20\\models\\english-left3words-distsim.tagger
-        
-//C:\\Program Files (x86)\\WordNet\\3.0\\dict\\
-        System.out.println("Enter complete file name for verbs file");
-        //verbsFileName= s.nextLine();
-        verbsFileName="C:\\Users\\Praveen\\OneDrive\\NLP\\Verbs.txt";
-        
-        System.out.println("Enter complete file name for producer queries file");
-        //producerQueriesFileName=s.nextLine();
-        producerQueriesFileName="C:\\Users\\Praveen\\OneDrive\\NLP\\ProducerQueries.txt";
-        
-        System.out.println("Enter complete file name for consumer queries file");
-        //consumerQueriesFileName=s.nextLine();
-        consumerQueriesFileName="C:\\Users\\Praveen\\OneDrive\\NLP\\ConsumerQueries.txt";
-        
-        System.out.println("Enter complete file name for general queries file");
-        //generalQueriesFileName=s.nextLine();
-        generalQueriesFileName="C:\\Users\\Praveen\\OneDrive\\NLP\\GeneralQueries.txt";
+    public BackendConnection(String verbsFileName,String producerQueriesFileName, String consumerQueriesFileName, String generalQueriesFileName) {
+        this.verbsFileName=verbsFileName;
+        this.producerQueriesFileName=producerQueriesFileName;
+        this.consumerQueriesFileName=consumerQueriesFileName;
+        this.generalQueriesFileName=generalQueriesFileName;
     }
     
     
@@ -73,7 +49,6 @@ class BackendConnection {
             } else {
                 vt = VerbType.supplementaryVerb;
             }
-            //System.out.println("Verb is : "+splitLine[0]+" and its type is : "+vt);
             verbs.put(splitLine[0], vt);
         }
         return verbs;
@@ -92,29 +67,29 @@ class BackendConnection {
     }
 
     // To write the processed query as whistle to the file
-    void writeQueryToFile(UserQuery w,boolean isQueryAQuestion) {
+    void writeQueryToFile(UserQuery userQuery,boolean isQueryAQuestion) {
         try {
-            FileWriter fw;
-            VerbType queryMainVerbType=w.getVerb().getVerbType();
+            FileWriter fileWriter;
+            VerbType queryMainVerbType=userQuery.getVerb().getVerbType();
             //Consumer Verb in Question sentence => Produer Query; Producer verb in Question Sentence => Consumer Query
             if (queryMainVerbType == VerbType.consumerVerb && !isQueryAQuestion||queryMainVerbType==VerbType.producerVerb && isQueryAQuestion) {
-                fw = new FileWriter(consumerQueriesFileName, true);
+                fileWriter = new FileWriter(consumerQueriesFileName, true);
             } else if (queryMainVerbType == VerbType.producerVerb && !isQueryAQuestion || queryMainVerbType==VerbType.consumerVerb && isQueryAQuestion) {
-                fw = new FileWriter(producerQueriesFileName, true);
+                fileWriter = new FileWriter(producerQueriesFileName, true);
             } else {
-                fw = new FileWriter(generalQueriesFileName, true);
+                fileWriter = new FileWriter(generalQueriesFileName, true);
             }
-            String requirements = "";
+            String requirements = new String();
             String adjectives = "";
-            for (int i = 0; i < w.getService().getServices().size(); i++) {
-                requirements += w.getService().getServices().get(i) + ",";
+            for (int i = 0; i < userQuery.getService().getServices().size(); i++) {
+                requirements += userQuery.getService().getServices().get(i) + ",";
             }
-            for (int i = 0; i < w.getService().getAdjectives().size(); i++) {
-                adjectives += w.getService().getAdjectives().get(i) + ",";
+            for (int i = 0; i < userQuery.getService().getAdjectives().size(); i++) {
+                adjectives += userQuery.getService().getAdjectives().get(i) + ",";
             }
-            try (BufferedWriter bw = new BufferedWriter(fw)) {
-                bw.write(w.getQuery() + ";" + w.getVerb().getSupplementaryVerb() + "," + w.getVerb().getMainVerb() + ";" + requirements + ";" + adjectives);
-                bw.newLine();
+            try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+                bufferedWriter.write(userQuery.getQuery() + ";" + userQuery.getVerb().getSupplementaryVerb() + "," + userQuery.getVerb().getMainVerb() + ";" + requirements + ";" + adjectives);
+                bufferedWriter.newLine();
             }
         } catch (IOException e) {
         }

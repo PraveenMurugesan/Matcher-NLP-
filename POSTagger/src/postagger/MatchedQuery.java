@@ -1,12 +1,12 @@
 package postagger;
 
-class Result {
+class MatchedQuery {
 
     private String producerQuery;
     private double relevanceCount; // To denote how close a consumer's query match with the producer query. 
 
-    Result(String pw) {
-        producerQuery = pw;
+    MatchedQuery(String producerQuery) {
+        this.producerQuery = producerQuery;
         relevanceCount = 0;
     }
     String getProducerQuery()
@@ -19,7 +19,7 @@ class Result {
     }
     void incrementRelevanceCount(double value)
     {
-        this.relevanceCount =this.relevanceCount+value;
+        this.relevanceCount = this.relevanceCount+value;
     }
 }
 

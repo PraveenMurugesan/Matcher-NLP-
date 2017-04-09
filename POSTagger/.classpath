@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/lib/jaws-bin.jar"/>
+	<classpathentry kind="lib" path="dist/lib/stanford-postagger-3.5.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="dist/lib/stanford-postagger-3.5.2-sources.jar"/>
+	<classpathentry kind="lib" path="dist/lib/stanford-postagger-3.5.2.jar"/>
+	<classpathentry kind="lib" path="dist/lib/stanford-postagger.jar"/>
+	<classpathentry kind="lib" path="dist/POSTagger.jar"/>
+	<classpathentry kind="lib" path="jaws-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

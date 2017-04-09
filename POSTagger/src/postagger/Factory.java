@@ -6,12 +6,12 @@ import java.io.IOException;
 //Factory Class to create Objects
 public class Factory {
 
-    UserQueryProcessing createQueryProcessingObject(Factory f) throws FileNotFoundException, IOException {
-        return new UserQueryProcessing(f);
+    UserQueryProcessor createQueryProcessorObject(Factory f) throws FileNotFoundException, IOException {
+        return new UserQueryProcessor(f);
     }
 
-    BackendConnection createBackendConnectionObject() {
-        return new BackendConnection();
+    BackendConnection createBackendConnectionObject(String verbsFileName,String producerQueriesFileName, String consumerQueriesFileName, String generalQueriesFileName) {
+        return new BackendConnection(verbsFileName,producerQueriesFileName,consumerQueriesFileName, generalQueriesFileName);
     }
 
     Stemmer createStemmerObject() {
@@ -22,8 +22,8 @@ public class Factory {
         return new UserQuery();
     }
 
-    Result createResultObject(String producerQuery) {
-        return new Result(producerQuery);
+    MatchedQuery createResultObject(String producerQuery) {
+        return new MatchedQuery(producerQuery);
     }
 
     Verb createVerbObject() {

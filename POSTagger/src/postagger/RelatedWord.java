@@ -2,13 +2,13 @@ package postagger;
 
 import java.util.ArrayList;
 
-class RelatedWords {
+class RelatedWord {
 
     private String word;
     private ArrayList<String> synsetDefinitions;
 
-    RelatedWords(String s) {
-        word = s;
+    RelatedWord(String word) {
+        this.word = word;
         synsetDefinitions = new ArrayList();
     }
 
